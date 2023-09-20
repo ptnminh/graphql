@@ -15,8 +15,8 @@ export class UserService {
     return createdUser.save();
   }
 
-  async findAll() {
-    return this.userModel.find().exec();
+  async findAll(limit: number, skip: number) {
+    return this.userModel.find().skip(skip).limit(limit).exec();
   }
 
   async findOne(email: string) {
@@ -41,9 +41,11 @@ export class UserService {
     return user;
   }
 
-  remove(email: string) {
-    return this.userModel.findOneAndRemove({
-      email,
-    });
+  async remove(email: string) {
+    return this.userModel
+      .findOneAndRemove({
+        email,
+      })
+      .exec();
   }
 }

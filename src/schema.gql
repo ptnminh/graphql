@@ -44,7 +44,7 @@ type Mutation {
 type Query {
   author(id: Int!): Author!
   book(id: Int!): Book!
-  findAllUser: [User!]!
+  findAllUser(limit: Int = 10, skip: Int = 0): [User!]!
   findOne(email: String!): User!
   getHello: String!
 }
