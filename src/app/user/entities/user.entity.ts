@@ -1,6 +1,7 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { Document, Schema as MongooSchema } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Book } from 'src/app/book/entities/book.entity';
 
 @ObjectType()
 @Schema()
@@ -23,6 +24,10 @@ export class User {
   @Field(() => String)
   @Prop()
   address: string;
+
+  @Field(() => [String])
+  @Prop({ type: [MongooSchema.Types.ObjectId], ref: Book.name })
+  books: MongooSchema.Types.ObjectId[];
 }
 
 export type UserDocument = User & Document;

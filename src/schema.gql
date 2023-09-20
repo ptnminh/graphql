@@ -2,24 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Author {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 type Book {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input CreateAuthorInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  _id: String!
+  title: String!
 }
 
 input CreateBookInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  title: String!
 }
 
 input CreateUserInput {
@@ -30,35 +19,24 @@ input CreateUserInput {
 }
 
 type Mutation {
-  createAuthor(createAuthorInput: CreateAuthorInput!): Author!
   createBook(createBookInput: CreateBookInput!): Book!
   createUser(createUserInput: CreateUserInput!): User!
-  removeAuthor(id: Int!): Author!
   removeBook(id: Int!): Book!
   removeUser(email: String!): User!
-  updateAuthor(updateAuthorInput: UpdateAuthorInput!): Author!
   updateBook(updateBookInput: UpdateBookInput!): Book!
   updateUser(updateUserInput: UpdateUserInput!): User!
 }
 
 type Query {
-  author(id: Int!): Author!
   book(id: Int!): Book!
   findAllUser(limit: Int = 10, skip: Int = 0): [User!]!
-  findOne(email: String!): User!
+  findOne(email: String!): User
   getHello: String!
 }
 
-input UpdateAuthorInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
-}
-
 input UpdateBookInput {
-  """Example field (placeholder)"""
-  exampleField: Int
   id: Int!
+  title: String
 }
 
 input UpdateUserInput {
@@ -71,6 +49,7 @@ input UpdateUserInput {
 type User {
   _id: String!
   address: String!
+  books: [String!]!
   email: String!
   name: String!
   password: String!

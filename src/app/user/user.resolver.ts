@@ -19,9 +19,8 @@ export class UserResolver {
     return this.userService.findAll(args.limit, args.skip);
   }
 
-  @Query(() => User)
+  @Query(() => User, { nullable: true })
   findOne(@Args('email', { type: () => String }) email: string) {
-    console.log(email);
     return this.userService.findOne(email);
   }
 

@@ -1,7 +1,17 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field } from '@nestjs/graphql';
+import { Document, Schema as MongooSchema } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @ObjectType()
+@Schema()
 export class Book {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => String)
+  _id: MongooSchema.Types.ObjectId;
+
+  @Field(() => String)
+  @Prop()
+  title: string;
 }
+
+export type BookDocument = Book & Document;
+export const BookSchema = SchemaFactory.createForClass(Book);
