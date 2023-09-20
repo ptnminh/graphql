@@ -1,11 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
-
+import { Model, Schema as MongooSchema } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { User, UserDocument } from './entities/user.entity';
 @Injectable()
 export class UserService {
-  create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
+  constructor(
+    @InjectModel(User.name)
+    private userModel: Model<UserDocument>,
+  ) {}
+  async create(createUserInput: CreateUserInput) {
+    const createdUser = new this.userModel(createUserInput);
+    return createdUser.save();
   }
 
   findAll() {
@@ -16,7 +23,7 @@ export class UserService {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserInput: UpdateUserInput) {
+  update(id: MongooSchema.Types.ObjectId, updateUserInput: UpdateUserInput) {
     return `This action updates a #${id} user`;
   }
 

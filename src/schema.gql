@@ -21,9 +21,9 @@ type Query {
 }
 
 input UpdateUserInput {
+  _id: String!
   address: String
   email: String
-  id: Int!
   name: String
   password: String
 }
