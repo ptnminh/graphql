@@ -15,19 +15,35 @@ export class UserService {
     return createdUser.save();
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+    return this.userModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(email: string) {
+    const user = await this.userModel
+      .findOne({
+        email: email,
+      })
+      .exec();
+    return user;
   }
 
-  update(id: MongooSchema.Types.ObjectId, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+  async update(email: string, updateUserInput: UpdateUserInput) {
+    const user = await this.userModel
+      .findOneAndUpdate(
+        {
+          email,
+        },
+        updateUserInput,
+      )
+      .exec();
+
+    return user;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  remove(email: string) {
+    return this.userModel.findOneAndRemove({
+      email,
+    });
   }
 }

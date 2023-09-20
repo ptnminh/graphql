@@ -6,6 +6,8 @@ import { join } from 'path';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppResolver } from './app.resolver';
 import { UserModule } from './user/user.module';
+import { BookModule } from './book/book.module';
+import { AuthorModule } from './author/author.module';
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -15,6 +17,8 @@ import { UserModule } from './user/user.module';
     }),
     MongooseModule.forRoot('mongodb://localhost:27017/nest'),
     UserModule,
+    BookModule,
+    AuthorModule,
   ],
   providers: [AppResolver, AppService],
 })
