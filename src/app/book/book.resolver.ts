@@ -13,14 +13,14 @@ export class BookResolver {
     return this.bookService.create(createBookInput);
   }
 
-  @Query(() => [Book], { name: 'book' })
-  findAll() {
+  @Query(() => [Book])
+  findBooks() {
     return this.bookService.findAll();
   }
 
-  @Query(() => Book, { name: 'book' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.bookService.findOne(id);
+  @Query(() => Book, { nullable: true })
+  findBook(@Args('title', { type: () => String }) title: string) {
+    return this.bookService.findOne(title);
   }
 
   @Mutation(() => Book)

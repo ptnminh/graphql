@@ -24,7 +24,7 @@ export class UserResolver {
     return this.userService.findOne(email);
   }
 
-  @Mutation(() => User)
+  @Mutation(() => User, { nullable: true })
   updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
     return this.userService.update(updateUserInput.email, updateUserInput);
   }

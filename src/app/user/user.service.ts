@@ -37,6 +37,7 @@ export class UserService {
         },
         updateUserInput,
       )
+      .populate('books')
       .exec();
 
     return user;

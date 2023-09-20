@@ -25,9 +25,9 @@ export class User {
   @Prop()
   address: string;
 
-  @Field(() => [String])
+  @Field(() => [Book])
   @Prop({ type: [MongooSchema.Types.ObjectId], ref: Book.name })
-  books: MongooSchema.Types.ObjectId[];
+  books: Book[];
 }
 
 export type UserDocument = User & Document;

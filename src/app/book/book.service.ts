@@ -16,12 +16,16 @@ export class BookService {
     return new this.bookModel(createBookInput).save();
   }
 
-  findAll() {
-    return `This action returns all book`;
+  async findAll() {
+    return this.bookModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} book`;
+  async findOne(title: string) {
+    return this.bookModel
+      .findOne({
+        title,
+      })
+      .exec();
   }
 
   update(id: number, updateBookInput: UpdateBookInput) {
